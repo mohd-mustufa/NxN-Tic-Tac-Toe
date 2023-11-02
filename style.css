@@ -1,0 +1,103 @@
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	min-height: 90vh;
+}
+
+#heading {
+	font-size: 3rem;
+	margin: 2rem 0;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+.cell {
+	height: 5rem;
+	width: 5rem;
+	border: 3px solid black;
+	cursor: pointer;
+}
+
+@media screen and (max-width: 650px) {
+	.cell {
+		height: 4rem;
+	}
+}
+
+@media screen and (min-width: 0px) and (max-width: 360px) {
+	.cell {
+		height: 3rem;
+	}
+	#heading {
+		font-size: 2.4rem;
+		margin: 1rem 0 1.5rem 0;
+	}
+	#options {
+		margin: 1rem;
+	}
+}
+
+/* Remove border from first and last cells in each row */
+tr > .cell:first-child,
+tr > .cell:last-child {
+	border-left: none;
+	border-right: none;
+}
+
+/* Remove border from first and last rows */
+tr:first-child .cell,
+tr:last-child .cell {
+	border-top: none;
+	border-bottom: none;
+}
+
+#options {
+	display: flex;
+	margin: 10px;
+	width: max-content;
+	margin: 2rem;
+}
+
+label {
+	font-size: 1.3rem;
+	min-width: fit-content;
+	padding: 1rem 0;
+}
+
+#board-size-dropdown {
+	margin: 0.5rem;
+	padding: 0 0.3rem;
+	font-size: 1rem;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	width: 10vw;
+	min-width: fit-content;
+	max-width: 5rem;
+	cursor: pointer;
+}
+
+#board-size-dropdown option {
+	font-size: 1rem;
+	background-color: #f1f1f1;
+}
+
+#reset {
+	margin: 0.5rem;
+	padding: 0.5rem;
+	font-size: 1rem;
+	border-radius: 5px;
+	border: 1px solid #ccc;
+	width: 8rem;
+	cursor: pointer;
+}
