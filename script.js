@@ -17,17 +17,22 @@ const generateBoard = (n) => {
 	}
 };
 
-function addEventListenerForBoardSize() {
+const addAllEventListeners = () => {
+	let selectedSize = 3;
 	const boardSizeDropdown = document.getElementById("board-size-dropdown");
 	boardSizeDropdown.addEventListener("change", () => {
-		const selectedNumber = boardSizeDropdown.value;
-		generateBoard(parseInt(selectedNumber));
+		selectedSize = parseInt(boardSizeDropdown.value);
+		generateBoard(selectedSize);
 	});
-}
+
+	const resetBtn = document.getElementById("reset");
+	resetBtn.addEventListener("click", () => generateBoard(selectedSize));
+};
 
 const startGame = () => {
+	let turn = "x";
 	generateBoard(3);
-	addEventListenerForBoardSize();
+	addAllEventListeners();
 };
 
 startGame();

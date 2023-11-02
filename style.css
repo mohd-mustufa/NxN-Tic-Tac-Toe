@@ -29,6 +29,10 @@ table {
 	cursor: pointer;
 }
 
+.cell:hover {
+	background-color: #ddd;
+}
+
 @media screen and (max-width: 650px) {
 	.cell {
 		height: 4rem;
