@@ -5,6 +5,7 @@ const startGame = () => {
 };
 
 const generateBoard = (n) => {
+	xTurn = true;
 	const board = [];
 	let table = document.getElementById("board");
 	table.innerHTML = "";
