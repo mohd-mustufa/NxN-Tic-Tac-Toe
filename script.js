@@ -6,6 +6,17 @@ const startGame = () => {
 	addEventListenersForBtns();
 };
 
+const addEventListenersForBtns = () => {
+	const boardSizeDropdown = document.getElementById("board-size-dropdown");
+	boardSizeDropdown.addEventListener("change", () => {
+		BOARD_SIZE = parseInt(boardSizeDropdown.value);
+		generateBoard(BOARD_SIZE);
+	});
+
+	const resetBtn = document.getElementById("reset");
+	resetBtn.addEventListener("click", () => generateBoard(BOARD_SIZE));
+};
+
 const generateBoard = (n) => {
 	xTurn = true;
 	const board = [];
@@ -56,83 +67,79 @@ const swapTurns = () => {
 	xTurn = !xTurn;
 };
 
-function checkWin(currentTurn) {
-	let n = BOARD_SIZE;
-	if (n === 3) {
-		// For a 3x3 board, check for 3 consecutive symbols in a row, column, or diagonal
-
-		// Check for rows
-		for (let i = 0; i < n * n; i += n) {
-			if (checkLine(i, 1, n, currentTurn)) return true;
-		}
-
-		// Check for cols
-		for (let i = 0; i < n; i++) {
-			if (checkLine(i, n, n, currentTurn)) return true;
-		}
-
-		// Check the main diagonal
-		if (checkLine(0, n + 1, n, currentTurn)) return true;
-
-		// Check the other diagonal
-		if (checkLine(2, 2, n, currentTurn)) return true;
-
-		return false;
-	} else {
-		// For an nxn board, check for (n-1) consecutive symbols in a row, column, or diagonal
-
-		// Check for rows
-		for (let i = 0; i < n * n; i += n) {
-			if (checkLine(i, 1, n - 1, currentTurn)) return true;
-			if (checkLine(i + 1, 1, n - 1, currentTurn)) return true;
-		}
-
-		// Check for cols
-		for (let i = 0; i < n; i++) {
-			if (checkLine(i, n, n - 1, currentTurn)) return true;
-			if (checkLine(i + n, n, n - 1, currentTurn)) return true;
-		}
-
-		// Check the main diagonal
-		if (checkLine(0, n + 1, n - 1, currentTurn)) return true;
-		if (checkLine(1, n + 1, n - 1, currentTurn)) return true;
-		if (checkLine(n, n + 1, n - 1, currentTurn)) return true;
-		if (checkLine(n + 1, n + 1, n - 1, currentTurn)) return true;
-
-		// Check the other diagonal
-		if (checkLine(n - 1, n - 1, n - 1, currentTurn)) return true;
-		if (checkLine(n - 2, n - 1, n - 1, currentTurn)) return true;
-		if (checkLine(n * 2 - 1, n - 1, n - 1, currentTurn)) return true;
-		if (checkLine(n * 2 - 2, n - 1, n - 1, currentTurn)) return true;
-
-		return false;
-	}
-}
-
-function checkLine(start, step, count, currentTurn) {
-	for (let i = 0; i < count; i++) {
-		if (cells[start + i * step].innerText !== currentTurn) {
-			return false; // Symbols in the line don't match
-		}
-	}
-	return true; // All symbols in the line match
-}
-
 const checkDraw = () => {
 	return [...cells].every(
 		(cell) => cell.innerHTML === "X" || cell.innerHTML === "O"
 	);
 };
 
-const addEventListenersForBtns = () => {
-	const boardSizeDropdown = document.getElementById("board-size-dropdown");
-	boardSizeDropdown.addEventListener("change", () => {
-		BOARD_SIZE = parseInt(boardSizeDropdown.value);
-		generateBoard(BOARD_SIZE);
-	});
+const checkWin = (currentTurn) => {
+	if (BOARD_SIZE === 3) {
+		return checkWinFor3x3Board(BOARD_SIZE, currentTurn);
+	} else {
+		return checkWinForNxNBoard(BOARD_SIZE, currentTurn);
+	}
+};
 
-	const resetBtn = document.getElementById("reset");
-	resetBtn.addEventListener("click", () => generateBoard(BOARD_SIZE));
+const checkWinFor3x3Board = (n, currentTurn) => {
+	// For a 3x3 board, check for 3 consecutive symbols in a row, column, or diagonal
+
+	// Check for rows
+	for (let i = 0; i < n * n; i += n) {
+		if (checkLine(i, 1, n, currentTurn)) return true;
+	}
+
+	// Check for cols
+	for (let i = 0; i < n; i++) {
+		if (checkLine(i, n, n, currentTurn)) return true;
+	}
+
+	// Check the main diagonal
+	if (checkLine(0, n + 1, n, currentTurn)) return true;
+
+	// Check the other diagonal
+	if (checkLine(2, 2, n, currentTurn)) return true;
+
+	return false;
+};
+
+const checkWinForNxNBoard = (n, currentTurn) => {
+	// For an nxn board, check for (n-1) consecutive symbols in a row, column, or diagonal
+
+	// Check for rows
+	for (let i = 0; i < n * n; i += n) {
+		if (checkLine(i, 1, n - 1, currentTurn)) return true;
+		if (checkLine(i + 1, 1, n - 1, currentTurn)) return true;
+	}
+
+	// Check for cols
+	for (let i = 0; i < n; i++) {
+		if (checkLine(i, n, n - 1, currentTurn)) return true;
+		if (checkLine(i + n, n, n - 1, currentTurn)) return true;
+	}
+
+	// Check the main diagonal
+	if (checkLine(0, n + 1, n - 1, currentTurn)) return true;
+	if (checkLine(1, n + 1, n - 1, currentTurn)) return true;
+	if (checkLine(n, n + 1, n - 1, currentTurn)) return true;
+	if (checkLine(n + 1, n + 1, n - 1, currentTurn)) return true;
+
+	// Check the other diagonal
+	if (checkLine(n - 1, n - 1, n - 1, currentTurn)) return true;
+	if (checkLine(n - 2, n - 1, n - 1, currentTurn)) return true;
+	if (checkLine(n * 2 - 1, n - 1, n - 1, currentTurn)) return true;
+	if (checkLine(n * 2 - 2, n - 1, n - 1, currentTurn)) return true;
+
+	return false;
+};
+
+const checkLine = (start, step, count, currentTurn) => {
+	for (let i = 0; i < count; i++) {
+		if (cells[start + i * step].innerText !== currentTurn) {
+			return false; // Symbols in the line don't match
+		}
+	}
+	return true; // All symbols in the line match
 };
 
 startGame();
