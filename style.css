@@ -5,6 +5,12 @@
 	font-family: Arial, Helvetica, sans-serif;
 }
 
+body {
+	margin: 0;
+	--box-size: 4.8rem;
+	--mark-size: calc(var(--box-size) * 0.6);
+}
+
 .container {
 	display: flex;
 	flex-direction: column;
@@ -23,12 +29,13 @@ table {
 }
 
 .cell {
-	height: 4.8rem;
-	width: 4.8rem;
+	height: var(--box-size);
+	width: var(--box-size);
 	min-width: 2rem;
+	min-height: 2rem;
 	border: 3px solid black;
 	cursor: pointer;
-	font-size: 2.5rem;
+	font-size: var(--mark-size);
 	font-weight: bold;
 	text-align: center;
 }
@@ -43,9 +50,10 @@ table {
 	}
 }
 
-@media screen and (min-width: 0px) and (max-width: 360px) {
+@media screen and (min-width: 0px) and (max-width: 400px) {
 	.cell {
 		height: 3rem;
+		font-size: calc(var(--box-size) * 0.4);
 	}
 	#heading {
 		font-size: 2.4rem;
