@@ -59,7 +59,7 @@ table {
 
 @media screen and (min-width: 0px) and (max-width: 400px) {
 	.cell {
-		height: 3rem;
+		height: 3.5rem;
 		font-size: calc(var(--box-size) * 0.4);
 	}
 	#heading {
