@@ -117,3 +117,37 @@ label {
 	width: 8rem;
 	cursor: pointer;
 }
+
+.winning-message {
+	display: none;
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-color: rgba(0, 0, 0, 0.9);
+	color: white;
+	font-size: 4rem;
+}
+
+.winning-message button {
+	margin: 1.5rem;
+	font-size: 2rem;
+	padding: 1rem 2rem;
+	border: 2px solid black;
+	border-radius: 0.5rem;
+	cursor: pointer;
+}
+
+.winning-message button:hover {
+	background-color: black;
+	color: white;
+	border-color: white;
+}
+
+.winning-message.show {
+	display: flex;
+}

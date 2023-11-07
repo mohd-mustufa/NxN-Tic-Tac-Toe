@@ -1,10 +1,19 @@
-xTurn = true;
 BOARD_SIZE = 3;
+xTurn = true;
+const winningMessage = document.getElementById("winningMessage");
+const winningMessageText = document.querySelector(
+	"[data-winning-message-text]"
+);
 
 const startGame = () => {
+	winningMessage.classList.remove("show");
+	winningMessageText.innerText = "";
 	generateBoard(BOARD_SIZE);
 	addEventListenersForBtns();
 };
+
+const restartButton = document.getElementById("restartButton");
+restartButton.addEventListener("click", startGame);
 
 const addEventListenersForBtns = () => {
 	const boardSizeDropdown = document.getElementById("board-size-dropdown");
@@ -53,11 +62,13 @@ const handleClick = (e) => {
 	cell.innerText = currentTurn;
 
 	if (checkWin(currentTurn)) {
-		// do something
 		console.log(currentTurn + " Wins");
+		winningMessageText.innerText = `${xTurn ? "X" : "O"} Wins!`;
+		winningMessage.classList.add("show");
 	} else if (checkDraw()) {
-		// do something else
 		console.log("draw");
+		winningMessageText.innerText = "Draw!";
+		winningMessage.classList.add("show");
 	} else {
 		swapTurns();
 	}
