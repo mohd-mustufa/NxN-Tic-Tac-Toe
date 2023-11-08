@@ -11,18 +11,57 @@ body {
 	--mark-size: calc(var(--box-size) * 0.6);
 }
 
-.container {
-	flex: 60%;
+.homepage {
+	height: 100vh;
+	width: 100vw;
+	display: none;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.homepage.show {
 	display: flex;
+}
+
+.homepage .heading {
+	margin-top: -4rem;
+}
+
+.homepage-btn {
+	margin: 0.7rem;
+	padding: 0.8rem 2rem;
+	font-size: 1.6rem;
+	border-radius: 8px;
+	border: 1px solid #ccc;
+	width: 13rem;
+	min-width: fit-content;
+	cursor: pointer;
+}
+
+.container .homepage-btn {
+	font-size: 1.2rem;
+	border-radius: 5px;
+	border: 1px solid #ccc;
+	width: 10rem;
+}
+
+.container {
+	display: none;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	min-height: 90vh;
 }
 
+.container.show {
+	display: flex;
+}
+
 .heading {
 	font-size: 3rem;
 	margin: 2rem 0;
+	text-align: center;
 }
 
 table {
@@ -43,32 +82,6 @@ table {
 
 .cell:hover {
 	background-color: #ddd;
-}
-
-@media screen and (max-width: 1000px) {
-	.main {
-		flex-direction: column;
-	}
-}
-
-@media screen and (max-width: 650px) {
-	.cell {
-		height: 4rem;
-	}
-}
-
-@media screen and (min-width: 0px) and (max-width: 400px) {
-	.cell {
-		height: 3.5rem;
-		font-size: calc(var(--box-size) * 0.4);
-	}
-	#heading {
-		font-size: 2.4rem;
-		margin: 1rem 0 1.5rem 0;
-	}
-	#options {
-		margin: 1rem;
-	}
 }
 
 /* Remove border from first and last cells in each row */
@@ -135,17 +148,19 @@ label {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	background-color: rgba(0, 0, 0, 0.85);
+	background-color: rgba(0, 0, 0, 0.9);
 	color: white;
 	font-size: 4rem;
+	text-align: center;
 }
 
 .winning-message button {
-	margin: 1.5rem;
-	font-size: 2rem;
+	margin: 1.5rem 1rem;
 	padding: 1rem 2rem;
-	border: 2px solid black;
+	width: 12rem;
+	font-size: 2rem;
 	border-radius: 0.5rem;
+	border: 2px solid black;
 	cursor: pointer;
 }
 
@@ -160,18 +175,24 @@ label {
 }
 
 .rules {
-	flex: 40%;
-	display: flex;
+	display: none;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	max-height: 100vh;
+	min-height: 100vh;
+	width: 100vw;
+}
+
+.rules.show {
+	display: flex;
 }
 
 .rules .heading {
+	text-decoration: underline;
 	color: #333;
 	font-size: 2.4rem;
 	margin-bottom: 2px;
+	margin-top: 1rem;
 }
 
 .rule-list {
@@ -187,7 +208,68 @@ label {
 	font-weight: bold;
 }
 
-.main {
-	display: flex;
-	width: 100%;
+#back {
+	margin: 1rem 0 1rem 0;
+}
+
+@media screen and (max-width: 650px) {
+	.cell {
+		height: 4rem;
+	}
+	.homepage .heading {
+		font-size: 2.5rem;
+	}
+	.homepage-btn {
+		margin: 0.6rem;
+		padding: 0.7rem 1.8rem;
+		font-size: 1.5rem;
+	}
+	.winning-message button {
+		margin: 1.5rem 0.7rem;
+		padding: 0.9rem 1.5rem;
+		width: 9.5rem;
+		font-size: 1.6rem;
+	}
+	.winning-message {
+		font-size: 3rem;
+	}
+}
+
+@media screen and (min-width: 0px) and (max-width: 400px) {
+	.cell {
+		height: 3.5rem;
+		font-size: calc(var(--box-size) * 0.4);
+	}
+	#heading {
+		font-size: 2.4rem;
+		margin: 1rem 0 1.5rem 0;
+	}
+	#options {
+		margin: 1rem;
+	}
+	.rules .heading {
+		font-size: 2.2rem;
+		margin-bottom: 1.5px;
+	}
+	.rule-list {
+		padding: 15px;
+		font-size: 0.95rem;
+	}
+	.homepage .heading {
+		font-size: 2rem;
+	}
+	.homepage-btn {
+		margin: 0.5rem;
+		padding: 0.6rem 1.6rem;
+		font-size: 1.3rem;
+	}
+	.winning-message button {
+		margin: 1rem 0.4rem;
+		padding: 0.7rem 1rem;
+		width: 8rem;
+		font-size: 1.2rem;
+	}
+	.winning-message {
+		font-size: 2.7rem;
+	}
 }

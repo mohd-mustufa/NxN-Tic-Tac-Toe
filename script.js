@@ -1,10 +1,21 @@
+// Initializing variables
 BOARD_SIZE = 3;
 xTurn = true;
 const winningMessage = document.getElementById("winningMessage");
 const winningMessageText = document.querySelector(
 	"[data-winning-message-text]"
 );
+const homepage = document.getElementById("homepage");
+const container = document.getElementById("container");
+const rules = document.getElementById("rules");
+const playBtn = document.getElementById("play-btn");
+const rulesBtn = document.getElementById("rules-btn");
+const backToHomeBtn = document.getElementById("back-to-home");
+const homeFromPlayBtn = document.getElementById("home-from-play");
+const homeFromWinBtn = document.getElementById("homeButton");
+const restartButton = document.getElementById("restartButton");
 
+// Function to begin the game
 const startGame = () => {
 	winningMessage.classList.remove("show");
 	winningMessageText.innerText = "";
@@ -12,9 +23,33 @@ const startGame = () => {
 	addEventListenersForBtns();
 };
 
-const restartButton = document.getElementById("restartButton");
+// Adding event listeners to btns
 restartButton.addEventListener("click", startGame);
+rulesBtn.addEventListener("click", () => {
+	homepage.classList.remove("show");
+	rules.classList.add("show");
+});
+backToHomeBtn.addEventListener("click", () => {
+	rules.classList.remove("show");
+	homepage.classList.add("show");
+});
+homeFromPlayBtn.addEventListener("click", () => {
+	container.classList.remove("show");
+	homepage.classList.add("show");
+});
+homeFromWinBtn.addEventListener("click", () => {
+	winningMessage.classList.remove("show");
+	winningMessageText.innerText = "";
+	homepage.classList.add("show");
+});
+playBtn.addEventListener("click", () => {
+	homepage.classList.remove("show");
+	container.classList.add("show");
+	BOARD_SIZE = 3;
+	startGame();
+});
 
+// Adds event listeners to the btns and board on the main page
 const addEventListenersForBtns = () => {
 	const boardSizeDropdown = document.getElementById("board-size-dropdown");
 	boardSizeDropdown.addEventListener("change", () => {
@@ -26,6 +61,7 @@ const addEventListenersForBtns = () => {
 	resetBtn.addEventListener("click", () => generateBoard(BOARD_SIZE));
 };
 
+// Generates the nxn board
 const generateBoard = (n) => {
 	xTurn = true;
 	const board = [];
@@ -50,12 +86,14 @@ const generateBoard = (n) => {
 	addEventListenersForCells();
 };
 
+// Add event listeners to each cell on the board
 const addEventListenersForCells = () => {
 	cells.forEach((cell) =>
 		cell.addEventListener("click", handleClick, { once: true })
 	);
 };
 
+// Checks for win/draw, if not either then swaps the turns
 const handleClick = (e) => {
 	const cell = e.target;
 	const currentTurn = xTurn ? "X" : "O";
@@ -74,16 +112,19 @@ const handleClick = (e) => {
 	}
 };
 
+// Changes the turn from x to o and vice versa
 const swapTurns = () => {
 	xTurn = !xTurn;
 };
 
+// Checks if all the cells on the board are not empty to check for draw
 const checkDraw = () => {
 	return [...cells].every(
 		(cell) => cell.innerHTML === "X" || cell.innerHTML === "O"
 	);
 };
 
+// Checks if a player has won the game
 const checkWin = (currentTurn) => {
 	if (BOARD_SIZE === 3) {
 		return checkWinFor3x3Board(BOARD_SIZE, currentTurn);
@@ -92,6 +133,7 @@ const checkWin = (currentTurn) => {
 	}
 };
 
+// Does win check for a 3x3 board
 const checkWinFor3x3Board = (n, currentTurn) => {
 	// For a 3x3 board, check for 3 consecutive symbols in a row, column, or diagonal
 
@@ -114,6 +156,7 @@ const checkWinFor3x3Board = (n, currentTurn) => {
 	return false;
 };
 
+// Win check for nxn board
 const checkWinForNxNBoard = (n, currentTurn) => {
 	// For an nxn board, check for (n-1) consecutive symbols in a row, column, or diagonal
 
@@ -144,6 +187,7 @@ const checkWinForNxNBoard = (n, currentTurn) => {
 	return false;
 };
 
+// Helper function for checkWin
 const checkLine = (start, step, count, currentTurn) => {
 	for (let i = 0; i < count; i++) {
 		if (cells[start + i * step].innerText !== currentTurn) {

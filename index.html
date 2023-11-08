@@ -8,78 +8,86 @@
 		<script src="script.js" defer></script>
 	</head>
 	<body>
-		<div class="main">
-			<div class="container">
-				<div class="heading">NxN Tic Tac Toe</div>
-				<table id="board"></table>
-				<div id="options">
-					<label for="board-size-dropdown">Board Size:</label>
-					<select id="board-size-dropdown" size="1">
-						<option value="3">3</option>
-						<option value="4">4</option>
-						<option value="5">5</option>
-						<option value="6">6</option>
-						<option value="7">7</option>
-						<option value="8">8</option>
-						<option value="9">9</option>
-						<option value="10">10</option>
-					</select>
-					<button id="reset">Reset</button>
-				</div>
-				<div class="winning-message" id="winningMessage">
-					<div data-winning-message-text></div>
+		<div class="homepage show" id="homepage">
+			<div class="heading">Welcome to NxN Tic Tac Toe</div>
+			<button class="homepage-btn" id="play-btn">Play Game</button>
+			<button class="homepage-btn" id="rules-btn">Rules</button>
+		</div>
+		<div class="container" id="container">
+			<div class="heading">NxN Tic Tac Toe</div>
+			<table id="board"></table>
+			<div id="options">
+				<label for="board-size-dropdown">Board Size:</label>
+				<select id="board-size-dropdown" size="1">
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+					<option value="8">8</option>
+					<option value="9">9</option>
+					<option value="10">10</option>
+				</select>
+				<button id="reset">Reset</button>
+			</div>
+			<button class="homepage-btn" id="home-from-play">Home</button>
+			<div class="winning-message" id="winningMessage">
+				<div data-winning-message-text></div>
+				<div>
 					<button id="restartButton">Restart</button>
+					<button id="homeButton">Home</button>
 				</div>
 			</div>
-			<div class="rules">
-				<div class="heading">Game Rules</div>
-				<div class="rule-list">
-					<p>
-						<span class="point">Objective:</span> The goal of the game is to be
-						the first to form a line of your symbol (either 'X' or 'O) of a
-						certain length, depending on the board size.
-					</p>
+		</div>
+		<div class="rules" id="rules">
+			<div class="heading">Game Rules</div>
+			<div class="rule-list">
+				<p>
+					<span class="point">Objective:</span> The goal of the game is to be
+					the first to form a line of your symbol (either 'X' or 'O) of a
+					certain length, depending on the board size.
+				</p>
 
-					<p>
-						<span class="point"> Board Size:</span>You can choose the board
-						size. The standard size is 3x3, but you can select a larger size,
-						such as 4x4 or 5x5.
-					</p>
+				<p>
+					<span class="point"> Board Size:</span>You can choose the board size.
+					The standard size is 3x3, but you can select a larger size, such as
+					4x4 or 5x5.
+				</p>
 
-					<p>
-						<span class="point"> Players:</span> Two players take turns. One is
-						'X,' and the other is 'O.'
-					</p>
+				<p>
+					<span class="point"> Players:</span> Two players take turns. One is
+					'X,' and the other is 'O.'
+				</p>
 
-					<p>
-						<span class="point"> Turns:</span> 'X' goes first, and then players
-						take turns to place their symbol on the board.
-					</p>
+				<p>
+					<span class="point"> Turns:</span> 'X' goes first, and then players
+					take turns to place their symbol on the board.
+				</p>
 
-					<p>
-						<span class="point"> Winning Condition:</span><br />
-						- 3x3 board: On a 3x3 board, you need 3 of your symbols in a row,
-						column, or diagonal to win.<br />
-						- Larger boards: (n x n, where n is the board size), you need (n-1)
-						consecutive symbols in a row, column, or diagonal to win.
-					</p>
+				<p>
+					<span class="point"> Winning Condition:</span><br />
+					- 3x3 board: On a 3x3 board, you need 3 of your symbols in a row,
+					column, or diagonal to win.<br />
+					- Larger boards: (n x n, where n is the board size), you need (n-1)
+					consecutive symbols in a row, column, or diagonal to win.
+				</p>
 
-					<p>
-						<span class="point"> Draw:</span> If the board is filled, and no
-						player has won, the game is a draw (tie).
-					</p>
+				<p>
+					<span class="point"> Draw:</span> If the board is filled, and no
+					player has won, the game is a draw (tie).
+				</p>
 
-					<p>
-						<span class="point"> Restart:</span> You can start a new game or
-						change the board size at any time.
-					</p>
+				<p>
+					<span class="point"> Restart:</span> You can start a new game or
+					change the board size at any time.
+				</p>
 
-					<p>
-						<span class="point">Enjoy the Game:</span> Have fun and enjoy the
-						challenge of winning!
-					</p>
-				</div>
+				<p>
+					<span class="point">Enjoy the Game:</span> Have fun and enjoy the
+					challenge of winning!
+				</p>
 			</div>
+			<button class="homepage-btn" id="back-to-home">Go Back</button>
 		</div>
 	</body>
 </html>
