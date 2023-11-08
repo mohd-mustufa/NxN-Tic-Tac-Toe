@@ -14,6 +14,7 @@ const backToHomeBtn = document.getElementById("back-to-home");
 const homeFromPlayBtn = document.getElementById("home-from-play");
 const homeFromWinBtn = document.getElementById("homeButton");
 const restartButton = document.getElementById("restartButton");
+const boardSizeDropdown = document.getElementById("board-size-dropdown");
 
 // Function to begin the game
 const startGame = () => {
@@ -46,12 +47,12 @@ playBtn.addEventListener("click", () => {
 	homepage.classList.remove("show");
 	container.classList.add("show");
 	BOARD_SIZE = 3;
+	boardSizeDropdown.value = 3;
 	startGame();
 });
 
 // Adds event listeners to the btns and board on the main page
 const addEventListenersForBtns = () => {
-	const boardSizeDropdown = document.getElementById("board-size-dropdown");
 	boardSizeDropdown.addEventListener("change", () => {
 		BOARD_SIZE = parseInt(boardSizeDropdown.value);
 		generateBoard(BOARD_SIZE);
