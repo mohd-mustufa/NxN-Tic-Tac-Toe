@@ -42,6 +42,7 @@ homeFromWinBtn.addEventListener("click", () => {
 	winningMessage.classList.remove("show");
 	winningMessageText.innerText = "";
 	homepage.classList.add("show");
+	container.classList.remove("show");
 });
 playBtn.addEventListener("click", () => {
 	homepage.classList.remove("show");
@@ -98,7 +99,7 @@ const addEventListenersForCells = () => {
 const handleClick = (e) => {
 	const cell = e.target;
 	const currentTurn = xTurn ? "X" : "O";
-	cell.innerText = currentTurn;
+	placeMark(cell, currentTurn);
 
 	if (checkWin(currentTurn)) {
 		console.log(currentTurn + " Wins");
@@ -111,6 +112,10 @@ const handleClick = (e) => {
 	} else {
 		swapTurns();
 	}
+};
+
+const placeMark = (cell, currentTurn) => {
+	cell.innerText = currentTurn;
 };
 
 // Changes the turn from x to o and vice versa
