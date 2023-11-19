@@ -116,6 +116,7 @@ const handleClick = (e) => {
 
 const placeMark = (cell, currentTurn) => {
 	cell.innerText = currentTurn;
+	cell.classList.add(currentTurn === "X" ? "x" : "o");
 };
 
 // Changes the turn from x to o and vice versa
