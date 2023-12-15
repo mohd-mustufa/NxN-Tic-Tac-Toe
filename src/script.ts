@@ -1,20 +1,25 @@
 // Initializing variables
-BOARD_SIZE = 3;
-xTurn = true;
-const winningMessage = document.getElementById("winningMessage");
+var BOARD_SIZE: number = 3;
+var xTurn: boolean = true;
+var cells: NodeListOf<HTMLElement>;
+
+// Getting DOM variables
+const winningMessage = document.getElementById("winningMessage") as Element;
 const winningMessageText = document.querySelector(
 	"[data-winning-message-text]"
-);
-const homepage = document.getElementById("homepage");
-const container = document.getElementById("container");
-const rules = document.getElementById("rules");
-const playBtn = document.getElementById("play-btn");
-const rulesBtn = document.getElementById("rules-btn");
-const backToHomeBtn = document.getElementById("back-to-home");
-const homeFromPlayBtn = document.getElementById("home-from-play");
-const homeFromWinBtn = document.getElementById("homeButton");
-const restartButton = document.getElementById("restartButton");
-const boardSizeDropdown = document.getElementById("board-size-dropdown");
+) as HTMLElement;
+const homepage = document.getElementById("homepage") as Element;
+const container = document.getElementById("container") as Element;
+const rules = document.getElementById("rules") as Element;
+const playBtn = document.getElementById("play-btn") as Element;
+const rulesBtn = document.getElementById("rules-btn") as Element;
+const backToHomeBtn = document.getElementById("back-to-home") as Element;
+const homeFromPlayBtn = document.getElementById("home-from-play") as Element;
+const homeFromWinBtn = document.getElementById("homeButton") as Element;
+const restartButton = document.getElementById("restartButton") as Element;
+const boardSizeDropdown = document.getElementById(
+	"board-size-dropdown"
+) as HTMLSelectElement;
 
 // Function to begin the game
 const startGame = () => {
@@ -48,7 +53,7 @@ playBtn.addEventListener("click", () => {
 	homepage.classList.remove("show");
 	container.classList.add("show");
 	BOARD_SIZE = 3;
-	boardSizeDropdown.value = 3;
+	boardSizeDropdown.value = "3";
 	startGame();
 });
 
@@ -59,25 +64,25 @@ const addEventListenersForBtns = () => {
 		generateBoard(BOARD_SIZE);
 	});
 
-	const resetBtn = document.getElementById("reset");
+	const resetBtn = document.getElementById("reset") as Element;
 	resetBtn.addEventListener("click", () => generateBoard(BOARD_SIZE));
 };
 
 // Generates the nxn board
-const generateBoard = (n) => {
+const generateBoard = (n: number) => {
 	xTurn = true;
 	const board = [];
-	let table = document.getElementById("board");
+	let table = document.getElementById("board") as HTMLTableElement;
 	table.innerHTML = "";
 
-	for (let row = 0; row < n; row++) {
-		array = [];
+	for (let row: number = 0; row < n; row++) {
+		let array = [];
 		const tableRow = table.insertRow(row);
-		for (let col = 0; col < n; col++) {
+		for (let col: number = 0; col < n; col++) {
 			const cell = tableRow.insertCell(col);
 			cell.classList.add("cell");
-			cell.setAttribute("row", row);
-			cell.setAttribute("col", col);
+			cell.setAttribute("row", row.toString());
+			cell.setAttribute("col", col.toString());
 			array.push(cell);
 		}
 		board.push(array);
@@ -96,8 +101,8 @@ const addEventListenersForCells = () => {
 };
 
 // Checks for win/draw, if not either then swaps the turns
-const handleClick = (e) => {
-	const cell = e.target;
+const handleClick = (e: MouseEvent) => {
+	const cell = e.target as HTMLElement;
 	const currentTurn = xTurn ? "X" : "O";
 	placeMark(cell, currentTurn);
 
@@ -114,7 +119,8 @@ const handleClick = (e) => {
 	}
 };
 
-const placeMark = (cell, currentTurn) => {
+// Places the X/O mark on the cell which is clicked
+const placeMark = (cell: HTMLElement, currentTurn: string) => {
 	cell.innerText = currentTurn;
 	cell.classList.add(currentTurn === "X" ? "x" : "o");
 };
@@ -132,7 +138,7 @@ const checkDraw = () => {
 };
 
 // Checks if a player has won the game
-const checkWin = (currentTurn) => {
+const checkWin = (currentTurn: string) => {
 	if (BOARD_SIZE === 3) {
 		return checkWinFor3x3Board(BOARD_SIZE, currentTurn);
 	} else {
@@ -141,7 +147,7 @@ const checkWin = (currentTurn) => {
 };
 
 // Does win check for a 3x3 board
-const checkWinFor3x3Board = (n, currentTurn) => {
+const checkWinFor3x3Board = (n: number, currentTurn: string) => {
 	// For a 3x3 board, check for 3 consecutive symbols in a row, column, or diagonal
 
 	// Check for rows
@@ -164,7 +170,7 @@ const checkWinFor3x3Board = (n, currentTurn) => {
 };
 
 // Win check for nxn board
-const checkWinForNxNBoard = (n, currentTurn) => {
+const checkWinForNxNBoard = (n: number, currentTurn: string) => {
 	// For an nxn board, check for (n-1) consecutive symbols in a row, column, or diagonal
 
 	// Check for rows
@@ -195,7 +201,12 @@ const checkWinForNxNBoard = (n, currentTurn) => {
 };
 
 // Helper function for checkWin
-const checkLine = (start, step, count, currentTurn) => {
+const checkLine = (
+	start: number,
+	step: number,
+	count: number,
+	currentTurn: string
+) => {
 	for (let i = 0; i < count; i++) {
 		if (cells[start + i * step].innerText !== currentTurn) {
 			return false; // Symbols in the line don't match
